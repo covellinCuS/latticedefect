@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>lattice defect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">サイトのタイトル</h1>
+      <nav class="site-nav" aria-label="主要ナビゲーション">
+        <a href="index.html">ホーム</a>
+        <a href="intro.html">紹介</a>
+        <a href="try_on_haul.html">問い合わせ</a>
+        <a href="fonts.html">フォント</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-section">
+    <div class="main-bg-overlay"><div class="main-bg-label" style="display:none;"></div></div>
+    <div class="split" aria-hidden="false">
+      <a class="split-item left" href="intro.html" aria-label="ILLUST BOOKページへ" data-bg="resource/left.png">
+        <span class="split-label left-label" aria-hidden="true">ILLUST<br>BOOK</span>
+        <span class="sr-only">ILLUST BOOKページへ</span>
+      </a>
+      <a class="split-item right" href="try_on_haul.html" aria-label="TRY ON HAUL CARDSページへ" data-bg="resource/right.jpg">
+        <span class="split-label right-label" aria-hidden="true">TRY ON HAUL<br>CARDS</span>
+        <span class="sr-only">TRY ON HAUL CARDSページへ</span>
+      </a> 
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; 2025 lattice defect</small>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      // 斜め領域のクリックで方向を保存（遷移先で読み取りスライドアニメーションを実行）
+      document.addEventListener('click', function(e){
+        var link = e.target.closest && e.target.closest('.split-item');
+        if (!link) return;
+        var dir = link.classList.contains('left') ? 'left' : (link.classList.contains('right') ? 'right' : null);
+        if (dir) sessionStorage.setItem('slideDir', dir);
+      }, true);
+    })();
+
+    // apply data-bg attribute images (if present) so images can be swapped by editing HTML only
+    (function(){
+      if (!document.querySelectorAll) return;
+      document.querySelectorAll('.split-item[data-bg]').forEach(function(el){
+        var bg = el.getAttribute('data-bg');
+        if (!bg) return;
+        // keep the overlay gradient by prepending it
+        var gradient = window.getComputedStyle(el).backgroundImage || '';
+        el.style.backgroundImage = "linear-gradient(250deg, rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('" + bg + "')";
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+        el.style.backgroundRepeat = 'no-repeat';
+      });
+    })();
+
+    // ホバーでmain-section全面に画像とラベルを広げる
+    (function(){
+      var overlay = document.querySelector('.main-bg-overlay');
+      var label = overlay.querySelector('.main-bg-label');
+      var main = document.querySelector('.main-section');
+      var left = document.querySelector('.split-item.left');
+      var right = document.querySelector('.split-item.right');
+      if (!overlay || !main || !left || !right || !label) return;
+      function setOverlay(bg, text) {
+        overlay.style.backgroundImage = "url('" + bg + "')";
+        overlay.classList.add('active');
+        label.innerHTML = text;
+        label.style.display = 'block';
+      }
+      function clearOverlay() {
+        overlay.style.backgroundImage = '';
+        overlay.classList.remove('active');
+        label.innerHTML = '';
+        label.style.display = 'none';
+      }
+      left.addEventListener('mouseenter', function(){
+        var bg = left.getAttribute('data-bg');
+        var text = left.querySelector('.split-label') ? left.querySelector('.split-label').innerHTML : '';
+        setOverlay(bg, text);
+      });
+      left.addEventListener('mouseleave', clearOverlay);
+      right.addEventListener('mouseenter', function(){
+        var bg = right.getAttribute('data-bg');
+        var text = right.querySelector('.split-label') ? right.querySelector('.split-label').innerHTML : '';
+        setOverlay(bg, text);
+      });
+      right.addEventListener('mouseleave', clearOverlay);
+    })();
+  </script>
+</body>
+</html>

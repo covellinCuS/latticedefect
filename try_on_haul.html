@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>問い合わせ — サンプルサイト</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title"></h1>
+      <nav class="site-nav" aria-label="主要ナビゲーション">
+        <a href="index.html">ホーム</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-section">
+    <div class="container">
+      <div class="spec-area" style="margin-bottom:2rem;padding:1.2rem 1rem;background:#f8fafc;border-radius:8px;border:1px solid #e6eef6;">
+        <h2 style="font-size:1.1rem;margin-bottom:.5em;color:#004080;">TRY ON HAUL CARDS (島村シャルロット)</h2>
+        <p style="color:#6b7280;">重ねることで着せ替えが可能な透明カードセット<br>サイズ: 63 × 88 mm<br>5枚セット</p>
+      </div>
+      <div class="canvas-layout">
+        <div class="preview-area-with-bgsel">
+          <div class="bgsel-panel">
+            <button type="button" class="bgsel-btn" data-bg="linear-gradient(to bottom right, rgba(0,64,128,0.5) 0%, #ffffff 65%)" aria-label="ブルーグラデーション" aria-pressed="true"></button>
+            <button type="button" class="bgsel-btn" data-bg="#fffbe6" aria-label="クリーム色"></button>
+            <button type="button" class="bgsel-btn" data-bg="#e6f7ff" aria-label="水色"></button>
+            <button type="button" class="bgsel-btn" data-bg="#f5f5f5" aria-label="グレー"></button>
+          </div>
+          <section class="preview" id="preview" aria-label="プレビュー">
+            <h2 class="sr-only">プレビュー</h2>
+            <div class="preview-box" role="img" aria-label="プレビュー表示領域">
+              <div class="preview-layers" aria-hidden="true">
+                <div class="layer base" data-layer="base"></div>
+                <div class="layer hair" data-layer="hair"></div>
+                <div class="layer cloth" data-layer="cloth"></div>
+              </div>
+              <div class="preview-placeholder">Preview Area</div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="items" aria-label="アイテム一覧">
+
+          <section class="item-section" id="base-body">
+            <h2>Base Body</h2> 
+            <div class="item-grid">
+              <button type="button" class="item" data-type="base" data-src="resource/preview/base_body.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">short / bikini</span></button>
+            </div>
+          </section>
+
+          <section class="item-section" id="hair">
+            <h2>Hair</h2> 
+            <div class="item-grid">
+              <button type="button" class="item" data-type="hair" data-src="resource/preview/hair-a.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">short (clear)</span></button>
+              <button type="button" class="item" data-type="hair" data-src="resource/preview/side_tail.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">side_tail</span></button>
+              <button type="button" class="item" data-type="hair" data-src="resource/preview/long.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">long</span></button>
+            </div>
+          </section>
+
+          <section class="item-section" id="cloth">
+            <h2>Cloth</h2>
+            <div class="item-grid">
+              <button type="button" class="item" data-type="cloth" data-src="resource/preview/cloth-a.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">bikini (clear)</span></button>
+              <button type="button" class="item" data-type="cloth" data-src="resource/preview/sweater.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">sweater</span></button>
+              <button type="button" class="item" data-type="cloth" data-src="resource/preview/qi_pao.png" aria-pressed="false"><div class="thumb" aria-hidden="true"></div><span class="label">qi_pao</span></button>
+            </div>
+          </section>
+
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; 2025 サンプルサイト</small>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var dir = sessionStorage.getItem('slideDir');
+      if (!dir) return;
+      document.body.classList.add('slide-in-' + dir);
+      sessionStorage.removeItem('slideDir');
+      document.addEventListener('animationend', function(){ document.body.classList.remove('slide-in-' + dir); }, { once: true });
+    })();
+
+    // 背景切替ボタン
+    document.addEventListener('DOMContentLoaded', function() {
+      var previewBox = document.querySelector('.preview-box');
+      var bgBtns = document.querySelectorAll('.bgsel-btn');
+      if (bgBtns.length && previewBox) {
+        bgBtns.forEach(function(btn, i) {
+          btn.addEventListener('click', function() {
+            bgBtns.forEach(function(b) { b.setAttribute('aria-pressed','false'); });
+            btn.setAttribute('aria-pressed','true');
+            var bg = btn.getAttribute('data-bg');
+            previewBox.style.background = bg;
+          });
+        });
+        // 初期背景
+        var active = document.querySelector('.bgsel-btn[aria-pressed="true"]');
+        if (active) previewBox.style.background = active.getAttribute('data-bg');
+      }
+    });
+  </script>
+
+
+
+  <script>
+    (function(){
+      var layers = {
+        base: document.querySelector('.preview-layers .layer.base'),
+        hair: document.querySelector('.preview-layers .layer.hair'),
+        cloth: document.querySelector('.preview-layers .layer.cloth')
+      };
+      var placeholder = document.querySelector('.preview-placeholder');
+
+      // load each item's image to set its thumbnail aspect ratio and show a thumbnail
+      document.querySelectorAll('.item[data-src]').forEach(function(btn){
+        var src = btn.getAttribute('data-src');
+        if (!src) return;
+        var img = new Image();
+        img.onload = function(){
+          var thumb = btn.querySelector('.thumb');
+          if (!thumb) return;
+          // set aspect-ratio to match actual image
+          if (img.naturalWidth && img.naturalHeight) {
+            thumb.style.aspectRatio = img.naturalWidth + ' / ' + img.naturalHeight;
+          }
+          // show thumbnail preview
+          thumb.style.backgroundImage = "url('" + src + "')";
+          thumb.style.backgroundSize = 'cover';
+          thumb.style.backgroundPosition = 'center';
+        };
+        img.src = src;
+      });
+
+      function setLayer(type, src) {
+        var el = layers[type];
+        if (!el) return;
+        if (src) {
+          el.style.backgroundImage = "url('" + src + "')";
+          placeholder && (placeholder.style.opacity = '0');
+        } else {
+          el.style.backgroundImage = '';
+          // check if no layers remain
+          if (!layers.base.style.backgroundImage && !layers.hair.style.backgroundImage && !layers.cloth.style.backgroundImage) {
+            placeholder && (placeholder.style.opacity = '1');
+          }
+        }
+      }
+
+      document.querySelectorAll('.item[data-type]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var type = btn.getAttribute('data-type');
+          var src = btn.getAttribute('data-src');
+
+          // toggle active (single select per type)
+          var parentGrid = btn.parentElement;
+          parentGrid.querySelectorAll('.item').forEach(function(s){ s.classList.remove('active'); s.setAttribute('aria-pressed','false'); });
+          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+
+          setLayer(type, src);
+        });
+      });
+
+      // initialize with first items
+      ['base','hair','cloth'].forEach(function(type){
+        var first = document.querySelector('.item[data-type="'+type+'"]');
+        if (first) first.click();
+      });
+    })();
+  </script>
+</body>
+</html>
