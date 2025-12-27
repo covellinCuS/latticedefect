@@ -12,7 +12,7 @@
     <div class="container">
       <h1 class="site-title">lattice defect</h1>
       <nav class="site-nav" aria-label="主要ナビゲーション">
-        <a href="index.html">ホーム</a>
+        <a href="index.html">ComicMarket107 12/30(日) 西1ホール な-18b Lattice Defect</a>
       </nav>
     </div>
   </header>
@@ -21,11 +21,11 @@
     <div class="main-bg-overlay"><div class="main-bg-label" style="display:none;"></div></div>
     <div class="split" aria-hidden="false">
       <a class="split-item left" href="intro.html" aria-label="ILLUST BOOKページへ" data-bg="resource/left.png">
-        <span class="split-label left-label" aria-hidden="true">ILLUST<br>BOOK</span>
+        <span class="split-label left-label" aria-hidden="true">COLOR<br>ILLUST<br>BOOK</span>
         <span class="sr-only">ILLUST BOOKページへ</span>
       </a>
       <a class="split-item right" href="try_on_haul.html" aria-label="TRY ON HAUL CARDSページへ" data-bg="resource/right.JPG">
-        <span class="split-label right-label" aria-hidden="true">TRY ON HAUL<br>CARDS</span>
+        <span class="split-label right-label" aria-hidden="true">TRY ON<br>HAUL<br>CARDS</span>
         <span class="sr-only">TRY ON HAUL CARDSページへ</span>
       </a> 
     </div>
@@ -38,15 +38,6 @@
   </footer>
 
   <script>
-    (function(){
-      // 斜め領域のクリックで方向を保存（遷移先で読み取りスライドアニメーションを実行）
-      document.addEventListener('click', function(e){
-        var link = e.target.closest && e.target.closest('.split-item');
-        if (!link) return;
-        var dir = link.classList.contains('left') ? 'left' : (link.classList.contains('right') ? 'right' : null);
-        if (dir) sessionStorage.setItem('slideDir', dir);
-      }, true);
-    })();
 
     // apply data-bg attribute images (if present) so images can be swapped by editing HTML only
     (function(){

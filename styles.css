@@ -3,18 +3,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(108px, 21vw, 216px);
+  font-size: 10vw;
   font-weight: 700;
   color: #fff;
   text-shadow: none;
   background: none;
   padding: 0;
-  border-radius: 0;
+  border-radius: 6px;
   pointer-events: none;
   z-index: 100;
   transition: transform .18s ease, opacity .18s ease;
-  white-space: pre-line;
-  text-align: center;
+  /* white-space: pre-line; */
 }
 .main-bg-label.left,
 .main-bg-label.right {
@@ -130,8 +129,8 @@ h2 { color: var(--primary); margin-bottom: .5rem; }
 }
 .split-item.left { clip-path: polygon(0 0, calc(30% - (var(--split-gap) / 2)) 0, calc(66.4% - (var(--split-gap) / 2)) 100%, 0 100%); background-image: linear-gradient(250deg, rgba(0,64,128,0.36), rgba(0,64,128,0.12)), url('resource/left.png'); background-size: cover; background-position: center; background-repeat: no-repeat; }
 .split-item.right { clip-path: polygon(calc(30% + (var(--split-gap) / 2)) 0, 100% 0, 100% 100%, calc(66.4% + (var(--split-gap) / 2)) 100%); background-image: linear-gradient(70deg, rgba(255,152,0,0.36), rgba(255,152,0,0.12)), url('resource/right.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.split-item:hover, .split-item:focus { transform: scale(1.01); background-color: rgba(0,0,0,0.04); outline: none; }
-.split-item:focus { box-shadow: 0 0 0 4px rgba(0,128,255,0.12); }
+/* .split-item:hover, .split-item:focus { transform: scale(1.01); background-color: rgba(0,0,0,0.04); outline: none; } */
+/* .split-item:focus { box-shadow: 0 0 0 4px rgba(0,128,255,0.12); } */
 
 /* 背景の明度を下げるオーバーレイ（約20%ダーク） */
 .split-item::before {
@@ -150,12 +149,12 @@ h2 { color: var(--primary); margin-bottom: .5rem; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(18px, 3.5vw, 36px);
+  font-size: 10vw;
   font-weight: 700;
   color: #fff;
   text-shadow: none;
-  background: rgba(0,0,0,0.18);
-  padding: .35rem .6rem;
+  background: none;
+  padding: 0;
   border-radius: 6px;
   pointer-events: none;
   z-index: 100;
@@ -163,72 +162,62 @@ h2 { color: var(--primary); margin-bottom: .5rem; }
 }
 
 /* 左右でラベルの位置を少し調整 */
-.split-item.left .split-label { right: 6%; left: auto; transform: translate(0, -50%); text-align: right; }
+.split-item.left .split-label { left: 6%; right: auto; transform: translate(0, -50%); text-align: right; }
 .split-item.left .split-label.left-label {
-  background: none !important;
-  padding: 0 !important;
   border-radius: 0 !important;
   color: #fff !important;
-  font-size: clamp(108px, 21vw, 216px) !important; /* 右ラベルと同じサイズ */
   line-height: 0.95 !important;
   text-align: left !important;
-  left: 6% !important; /* 左端に配置 */
-  right: auto !important;
   transform: translate(0, -50%) !important;
   text-shadow: none !important;
   white-space: normal !important;
 }
-.split-item.right .split-label { right: 6%; transform: translate(0, -50%); }
 
 /* 右ラベル固有スタイル: 背景を削除、白文字、サイズを大きくして右端に配置（2行） */
-
-/* モバイル: 左ラベルも中央配置に戻して小さく */
-@media (max-width: 520px) {
-  .split-item .split-label { left: 50%; font-size: 18px; padding: .25rem .5rem; transform: translate(-50%, -50%); }
-  .split-item.right .split-label.right-label { font-size: 18px !important; left: 50% !important; right: auto !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
-  .split-item.left .split-label.left-label { font-size: 18px !important; left: 50% !important; right: auto !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
-}
+.split-item.right .split-label { right: 6%; left: auto; transform: translate(0, -50%); }
 .split-item.right .split-label.right-label {
-  background: none !important;
-  padding: 0 !important;
   border-radius: 0 !important;
   color: #fff !important;
-  font-size: clamp(108px, 21vw, 216px) !important; /* 2倍に拡大 */
   line-height: 0.95 !important;
   text-align: right !important;
-  right: 6% !important; /* 要素の右端付近に配置 */
-  left: auto !important;
   transform: translate(0, -50%) !important; /* 右揃えにする */
   text-shadow: none !important;
   white-space: normal !important;
 }
 
+/* モバイル: 左ラベルも中央配置に戻して小さく */
+@media (max-width: 520px) {
+  .split-item .split-label { left: 50%; font-size: 18vw; padding: .25rem .5rem; transform: translate(-50%, -50%); }
+  .split-item.right .split-label.right-label { top: auto; bottom: 6%; left: 50% !important; right: auto !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
+  .split-item.left .split-label.left-label { top: 20%; left: 50% !important; right: auto !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
+}
+
 /* フォーカス/ホバー時の強調 */
-.split-item.left:focus .split-label,
+/* .split-item.left:focus .split-label,
 .split-item.left:hover .split-label { transform: translate(0, -50%) scale(1.04); opacity: 1; }
 
 .split-item.right:focus .split-label.right-label,
-.split-item.right:hover .split-label.right-label { transform: translate(0, -50%) scale(1.04); opacity: 1; }
+.split-item.right:hover .split-label.right-label { transform: translate(0, -50%) scale(1.04); opacity: 1; } */
 
 /* モバイル: 右ラベルは中央配置に戻して小さく */
-@media (max-width: 520px) {
+/* @media (max-width: 520px) {
   .split-item .split-label { left: 50%; font-size: 18px; padding: .25rem .5rem; transform: translate(-50%, -50%); }
   .split-item.right .split-label.right-label { font-size: 18px !important; left: 50% !important; right: auto !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
-}
+} */
 
 /* スクリーンリーダー用の非表示テキスト */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 /* レスポンシブ: 高さを小さくしてタップしやすく */
 @media (max-width: 920px) {
-  .main-section { min-height: 50vh; }
+  .main-section { min-height: 200vw; }
 }
 
 /* モバイルでは縦分割にする（タップしやすく） */
 @media (max-width: 520px) {
-  .main-section { min-height: auto; }
-  .split-item.left { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
-  .split-item.right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+  .main-section { min-height: 200vw; }
+  .split-item.left { clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%); }
+  .split-item.right { clip-path: polygon(0 60%, 100% 40%, 100% 100%, 0 100%); }
 }
 
 /* prefers-reduced-motion を尊重 */
@@ -238,22 +227,12 @@ h2 { color: var(--primary); margin-bottom: .5rem; }
 }
 
 /* スライドインアニメーション */
-@keyframes slideInFromLeft { from { transform: translateX(-12%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-@keyframes slideInFromRight { from { transform: translateX(12%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-body.slide-in-left .main-section .container { animation: slideInFromLeft 420ms cubic-bezier(.2,.8,.2,1) both; }
-body.slide-in-right .main-section .container { animation: slideInFromRight 420ms cubic-bezier(.2,.8,.2,1) both; }
-
-/* Contact form */
-.contact-form { max-width: 720px; margin-top: 1rem; }
-.form-row { margin-bottom: 1rem; }
-.form-row label { display: block; font-weight: 700; margin-bottom: .25rem; }
-.form-input { width: 100%; padding: .6rem; border: 1px solid #d7e7f5; border-radius: 6px; font-size: 1rem; font-family: inherit; }
-.form-input:focus { outline: 3px solid rgba(0,128,255,0.12); }
-.form-error { color: #b91c1c; font-size: .9rem; margin-top: .25rem; min-height: 1.2em; }
-.form-actions { display: flex; gap: .5rem; align-items: center; margin-top: .5rem; }
-.cta.secondary { background: #fff; color: var(--primary); border: 1px solid var(--primary); font-weight: 600; }
-.form-success { margin-top: 1rem; color: #065f46; background: #ecfdf5; padding: .75rem; border-radius: 6px; border: 1px solid #d1fae5; }
+body.slide-in-left .main-section .container,
+body.slide-in-right .main-section .container {
+  animation: fadeIn 1680ms cubic-bezier(.2,.8,.2,1) both;
+}
 
 /* Try-on layout: preview + items */
 .canvas-layout { display: grid; grid-template-columns: 1fr 420px; gap: 1rem; align-items: start; }
@@ -292,7 +271,7 @@ body.slide-in-right .main-section .container { animation: slideInFromRight 420ms
     background: linear-gradient(to bottom right, rgba(0,64,128,0.5) 0%, #ffffff 65%);
     border: 1px solid #e6eef6;
     border-radius: 8px;
-    min-height: 60vh;
+    width: 70vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,8 +279,9 @@ body.slide-in-right .main-section .container { animation: slideInFromRight 420ms
     font-size: 1rem;
     position: relative;
     overflow: hidden;
-    width: 100%;
-    max-width: 480px;
+    height: 100%;
+    /* min-width: 200px; */
+    max-width: 340px;
     aspect-ratio: 63 / 88;
   }
 .preview-layers { position: absolute; inset: 0; z-index: 2; }
@@ -340,7 +320,7 @@ body.slide-in-right .main-section .container { animation: slideInFromRight 420ms
 .site-footer { padding: 1rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
 
 /* フォーカス表示 (アクセシビリティ向上) */
-a:focus, button:focus { outline: 3px solid rgba(0, 128, 255, 0.2); outline-offset: 2px; }
+/* a:focus, button:focus { outline: 3px solid rgba(0, 128, 255, 0.2); outline-offset: 2px; } */
 
 /* レスポンシブ */
 @media (max-width: 600px) {

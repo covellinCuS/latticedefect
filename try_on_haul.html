@@ -12,7 +12,7 @@
     <div class="container">
       <h1 class="site-title"></h1>
       <nav class="site-nav" aria-label="主要ナビゲーション">
-        <a href="index.html">ホーム</a>
+        <a href="index.html">ComicMarket107 12/30(日) 西1ホール な-18b Lattice Defect</a>
       </nav>
     </div>
   </header>
@@ -21,15 +21,15 @@
     <div class="container">
       <div class="spec-area" style="margin-bottom:2rem;padding:1.2rem 1rem;background:#f8fafc;border-radius:8px;border:1px solid #e6eef6;">
         <h2 style="font-size:1.1rem;margin-bottom:.5em;color:#004080;">TRY ON HAUL CARDS (島村シャルロット)</h2>
-        <p style="color:#6b7280;">重ねることで着せ替えが可能な透明カードセット<br>サイズ: 63 × 88 mm<br>5枚セット</p>
+        <p style="font-size:0.6rem; color:#6b7280;">重ねることで着せ替えが可能な透明カードセット<br>サイズ: 63 × 88 mm<br>5枚セット</p>
       </div>
       <div class="canvas-layout">
         <div class="preview-area-with-bgsel">
           <div class="bgsel-panel">
             <button type="button" class="bgsel-btn" data-bg="linear-gradient(to bottom right, rgba(0,64,128,0.5) 0%, #ffffff 65%)" aria-label="ブルーグラデーション" aria-pressed="true"></button>
-            <button type="button" class="bgsel-btn" data-bg="#fffbe6" aria-label="クリーム色"></button>
-            <button type="button" class="bgsel-btn" data-bg="#e6f7ff" aria-label="水色"></button>
-            <button type="button" class="bgsel-btn" data-bg="#f5f5f5" aria-label="グレー"></button>
+            <button type="button" class="bgsel-btn" data-bg="#fffbe6" data-src="resource/preview/gothic.jpg" aria-label="クリーム色"></button>
+            <button type="button" class="bgsel-btn" data-bg="#e6f7ff" data-src="resource/preview/china.jpg" aria-label="水色"></button>
+            <button type="button" class="bgsel-btn" data-bg="#f5f5f5" data-src="resource/preview/sea-side.jpg"aria-label="グレー"></button>
           </div>
           <section class="preview" id="preview" aria-label="プレビュー">
             <h2 class="sr-only">プレビュー</h2>
@@ -100,8 +100,10 @@
           btn.addEventListener('click', function() {
             bgBtns.forEach(function(b) { b.setAttribute('aria-pressed','false'); });
             btn.setAttribute('aria-pressed','true');
-            var bg = btn.getAttribute('data-bg');
-            previewBox.style.background = bg;
+            var bg = btn.getAttribute('data-src');
+            previewBox.style.background = "url('" + bg + "')";
+            previewBox.style.backgroundSize = 'cover';
+            previewBox.style.backgroundPosition = 'center';
           });
         });
         // 初期背景
