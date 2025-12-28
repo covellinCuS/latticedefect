@@ -24,7 +24,7 @@
         <span class="split-label left-label" aria-hidden="true">COLOR<br>ILLUST<br>BOOK</span>
         <span class="sr-only">ILLUST BOOKページへ</span>
       </a>
-      <a class="split-item right" href="try_on_haul.html" aria-label="TRY ON HAUL CARDSページへ" data-bg="resource/right.jpg">
+      <a class="split-item right" href="try_on_haul.html" aria-label="TRY ON HAUL CARDSページへ" data-bg="resource/right.png">
         <span class="split-label right-label" aria-hidden="true">TRY ON<br>HAUL<br>CARDS</span>
         <span class="sr-only">TRY ON HAUL CARDSページへ</span>
       </a> 
@@ -54,39 +54,6 @@
       });
     })();
 
-    // ホバーでmain-section全面に画像とラベルを広げる
-    (function(){
-      var overlay = document.querySelector('.main-bg-overlay');
-      var label = overlay.querySelector('.main-bg-label');
-      var main = document.querySelector('.main-section');
-      var left = document.querySelector('.split-item.left');
-      var right = document.querySelector('.split-item.right');
-      if (!overlay || !main || !left || !right || !label) return;
-      function setOverlay(bg, text) {
-        overlay.style.backgroundImage = "url('" + bg + "')";
-        overlay.classList.add('active');
-        label.innerHTML = text;
-        label.style.display = 'block';
-      }
-      function clearOverlay() {
-        overlay.style.backgroundImage = '';
-        overlay.classList.remove('active');
-        label.innerHTML = '';
-        label.style.display = 'none';
-      }
-      left.addEventListener('mouseenter', function(){
-        var bg = left.getAttribute('data-bg');
-        var text = left.querySelector('.split-label') ? left.querySelector('.split-label').innerHTML : '';
-        setOverlay(bg, text);
-      });
-      left.addEventListener('mouseleave', clearOverlay);
-      right.addEventListener('mouseenter', function(){
-        var bg = right.getAttribute('data-bg');
-        var text = right.querySelector('.split-label') ? right.querySelector('.split-label').innerHTML : '';
-        setOverlay(bg, text);
-      });
-      right.addEventListener('mouseleave', clearOverlay);
-    })();
   </script>
 </body>
 </html>
