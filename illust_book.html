@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ILLUST BOOK - lattice defect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .carousel {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+    }
+    .carousel::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container" style="display:flex;align-items:center;gap:2rem;">
+      <a href="index.html" style="display:inline-block;line-height:0;">
+        <img src="resource/lattice defect.svg" alt="lattice defect ロゴ" style="height:64px;width:auto;vertical-align:middle;" />
+      </a>
+      <nav class="site-nav" aria-label="主要ナビゲーション">
+        <a href="index.html">ComicMarket107 12/30(日) 西1ホール な-18b Lattice Defect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-section" style="background-image: url('resource/left.png'); background-color: rgba(255, 255, 255, 0.6); background-blend-mode: lighten; background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="spec-area" style="margin-bottom:2rem;padding:1.2rem 2rem;background:#00000010;border-radius:8px;">
+        <h2 style="font-size:3rem;margin-bottom:.5em;color:#fff; line-height: 1.1;">DAWN to DUSK to</h2>
+        <p style="font-size:0.8rem; color:#ffffff;">ななしいんくメンバーを中心としたフルカラーイラスト本、サイズ: B5判 (変形: 182 × 182 mm)、紙種: ヴァンヌーボーVGスノーホワイト 130 kg、表紙・本文フルカラー 24ページ</p>
+        <div style="font-size:1.2rem;font-weight:bold;color:#fff;background:#004080cc;padding:0.2em 1.2em;border-radius:1em;display:inline-block;margin-top:0.7em;letter-spacing:0.1em;">￥500</div>
+      </div>
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2rem;">
+        <img src="resource/booklet/cover.png" alt="表紙画像" style="min-width:240px; width:40vw; max-width:480px; height:auto;object-fit:cover;box-shadow:0 2px 8px #0001;" />
+      </div>
+
+      <!-- ページプレビュー用カルーセル -->
+      <div class="carousel-area" style="margin-bottom:2.5rem;">
+        <div class="carousel" style="display:flex;gap:1rem;overflow-x:auto;padding:0.5rem 0;">
+
+          <!-- ↓HTMLで12枚分 -->
+          <img class="carousel-thumb" src="resource/booklet/page-01.png" alt="ページ1" data-page="1" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+          <img class="carousel-thumb" src="resource/booklet/page-02.png" alt="ページ2" data-page="2" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+          <img class="carousel-thumb" src="resource/booklet/page-03.png" alt="ページ3" data-page="3" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+          <img class="carousel-thumb" src="resource/booklet/page-04.png" alt="ページ4" data-page="4" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+          <img class="carousel-thumb" src="resource/booklet/page-05.png" alt="ページ5" data-page="5" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+          <img class="carousel-thumb" src="resource/booklet/page-06.png" alt="ページ6" data-page="6" style="width:100px;height:100px;object-fit:cover;cursor:pointer;box-shadow:0 1px 4px #0001;" />
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; 2025 lattice defect</small>
+    </div>
+  </footer>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // ====== 無限自動スクロールカルーセル ======
+    var carousel = document.querySelector('.carousel');
+    if (carousel) {
+      // クローンを末尾に追加してループ感を出す
+      var thumbsArr = Array.from(carousel.children).filter(function(el){return el.classList && el.classList.contains('carousel-thumb');});
+      thumbsArr.forEach(function(node){
+        var clone = node.cloneNode(true);
+        clone.setAttribute('aria-hidden','true');
+        carousel.appendChild(clone);
+      });
+      var scrollSpeed = 0.5; // px/ms
+      var interval = 128; // ms (約60fps)
+      var maxScroll = carousel.scrollWidth / 2;
+      function autoScroll() {
+        if (carousel.scrollLeft >= maxScroll) {
+          carousel.scrollLeft = 0;
+        } else {
+          carousel.scrollLeft += scrollSpeed;
+        }
+      }
+      var scrollTimer = setInterval(autoScroll, interval);
+      // ユーザー操作時は一時停止し、離すと再開
+      var pause = false;
+      carousel.addEventListener('mouseenter', function(){ pause = true; });
+      carousel.addEventListener('mouseleave', function(){ pause = false; });
+      carousel.addEventListener('touchstart', function(){ pause = true; });
+      carousel.addEventListener('touchend', function(){ pause = false; });
+      setInterval(function(){ if (!pause) autoScroll(); }, interval);
+    }
+    // ====== ここまで ======
+  });
+</script>
+</body>
+</html>
